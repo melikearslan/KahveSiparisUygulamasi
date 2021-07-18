@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class CoffeeOrder {
     private final int coffeeNumber;
     private final String name;
