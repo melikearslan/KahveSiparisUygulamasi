@@ -21,5 +21,7 @@ public class CoffeeShopApplication {
         System.out.println("Lütfen içmek istediğiniz kahvenin numarasını giriniz:");
         coffeeNumber = scan.nextInt();
 
+        // 2. Gereksinim
+        System.out.println("Teşekkürler kahveniz hazırlanıyor.");
     }
 }
