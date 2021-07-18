@@ -5,18 +5,21 @@ import java.util.Scanner;
 
 public class CoffeeShopApplication {
     static class CoffeeOrder {
+        int coffeeNumber;
         String name;
+        int price; // Türk lirası
         Map<String, Integer> ingredients;
 
-        CoffeeOrder(String name) {
+        CoffeeOrder(int coffeeNumber, String name, int price, Map<String, Integer> ingredients) {
+            this.coffeeNumber = coffeeNumber;
             this.name = name;
-            ingredients = new HashMap<String, Integer>();
+            this.price = price;
+            this.ingredients = new HashMap<String, Integer>(ingredients);
         }
 
-        void addIngredients(Map<String, Integer> i) {
-            for (Map.Entry<String, Integer> entry: i.entrySet()) {
-                ingredients.put(entry.getKey(), entry.getValue());
-            }
+        @Override
+        public String toString() {
+            return coffeeNumber + ". " + name + " (" + price + " ₺)\n";
         }
 
         void printOrderInfo() {
@@ -36,15 +39,8 @@ public class CoffeeShopApplication {
 
         Scanner scan = new Scanner(System.in);
 
-        final String coffeeList = "1. Espresso (7 ₺)\n" +
-                "2. Double Espresso (12 ₺)\n" +
-                "3. Cappuccino (12 ₺)\n" +
-                "4. Caffe Latte (12 ₺)\n" +
-                "5. Mocha (13 ₺)\n" +
-                "6. Americano (10 ₺)\n" +
-                "7. Hot Water  (3 ₺)\n";
+        ArrayList<CoffeeOrder> coffeeList = new ArrayList<>();
 
-        Map<String, CoffeeOrder> recipes = new HashMap<String, CoffeeOrder>();
         Map<String, Integer> esprIng = Map.ofEntries(
                 Map.entry("Espresso", 1)
         );
@@ -87,50 +83,14 @@ public class CoffeeShopApplication {
         System.out.println("Teşekkürler kahveniz hazırlanıyor.");
 
         // 3. Gereksinim
-        recipes.put("Espresso", new CoffeeOrder("Espresso"));
-        recipes.put("Double Espresso", new CoffeeOrder("Double Espresso"));
-        recipes.put("Americano", new CoffeeOrder("Americano"));
-        recipes.put("Cappuccino", new CoffeeOrder("Cappuccino"));
-        recipes.put("Caffe Latte", new CoffeeOrder("Caffe Latte"));
-        recipes.put("Mocha", new CoffeeOrder("Mocha"));
-        recipes.put("Hot Water", new CoffeeOrder("Hot Water"));
+        coffeeList.add(new CoffeeOrder(1, "Espresso", 7, esprIng));
+        coffeeList.add(new CoffeeOrder(2, "Double Espresso", 12, dEsprIng));
+        coffeeList.add(new CoffeeOrder(3, "Cappuccino", 12, cappIng));
+        coffeeList.add(new CoffeeOrder(4, "Caffe Latte", 12, latteIng));
+        coffeeList.add(new CoffeeOrder(5, "Mocha", 13, mochaIng));
+        coffeeList.add(new CoffeeOrder(6, "Americano", 10, amerIng));
+        coffeeList.add(new CoffeeOrder(7, "Hot Water", 3, waterIng));
 
-        recipes.get("Espresso").addIngredients(esprIng);
-        recipes.get("Double Espresso").addIngredients(dEsprIng);
-        recipes.get("Americano").addIngredients(amerIng);
-        recipes.get("Cappuccino").addIngredients(cappIng);
-        recipes.get("Caffe Latte").addIngredients(latteIng);
-        recipes.get("Mocha").addIngredients(mochaIng);
-        recipes.get("Hot Water").addIngredients(waterIng);
-
-        switch (coffeeNumber) {
-            case 1:
-                recipes.get("Espresso").printOrderInfo();
-                break;
-            case 2:
-                recipes.get("Double Espresso").printOrderInfo();
-                break;
-            case 3:
-                recipes.get("Americano").printOrderInfo();
-                break;
-            case 4:
-                recipes.get("Cappuccino").printOrderInfo();
-                break;
-            case 5:
-                recipes.get("Caffe Latte").printOrderInfo();
-                break;
-            case 6:
-                recipes.get("Mocha").printOrderInfo();
-                break;
-            case 7:
-                recipes.get("Hot Water").printOrderInfo();
-                break;
-            default:
-                System.out.println("Lütfen geçerli bir numara giriniz: ");
-
-        }
-
-
-
+        coffeeList.get(coffeeNumber - 1).printOrderInfo();
     }
 }
