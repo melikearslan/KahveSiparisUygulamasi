@@ -17,16 +17,15 @@ public class CoffeeShopApplication {
             this.ingredients = new HashMap<String, Integer>(ingredients);
         }
 
-        @Override
-        public String toString() {
-            return coffeeNumber + ". " + name + " (" + price + " ₺)\n";
+        void printCoffeeInfo() {
+            System.out.println(coffeeNumber + ". " + name + " (" + price + " ₺)");
         }
 
         void printOrderInfo() {
             int ind = 0;
             System.out.println(name + " seçtiniz. Bu içeceğimiz: ");
             for (Map.Entry<String, Integer> entry: ingredients.entrySet()) {
-                System.out.print("- " + entry.getValue() + " doz "
+                System.out.print(entry.getValue() + " doz "
                         + entry.getKey());
                 ind++;
                 if (ind != ingredients.entrySet().size())
@@ -71,22 +70,6 @@ public class CoffeeShopApplication {
                 Map.entry("Sıcak Su", 5)
         );
 
-        int coffeeNumber;
-
-        // 1. Gereksinim
-        System.out.println("Kahve Listesi: ");
-        System.out.println(coffeeList);
-        System.out.println("Lütfen içmek istediğiniz kahvenin numarasını giriniz:");
-        coffeeNumber = scan.nextInt();
-        do {
-            System.out.println("Lütfen 1 ile 7 arası geçerli bir numara giriniz: ");
-            coffeeNumber = scan.nextInt();
-        } while (coffeeNumber < 0 || coffeeNumber > 8);
-
-        // 2. Gereksinim
-        System.out.println("Teşekkürler kahveniz hazırlanıyor.");
-
-        // 3. Gereksinim
         coffeeList.add(new CoffeeOrder(1, "Espresso", 7, esprIng));
         coffeeList.add(new CoffeeOrder(2, "Double Espresso", 12, dEsprIng));
         coffeeList.add(new CoffeeOrder(3, "Cappuccino", 12, cappIng));
@@ -95,6 +78,24 @@ public class CoffeeShopApplication {
         coffeeList.add(new CoffeeOrder(6, "Americano", 10, amerIng));
         coffeeList.add(new CoffeeOrder(7, "Hot Water", 3, waterIng));
 
+        int coffeeNumber;
+
+        // 1. Gereksinim
+        System.out.println("Kahve Listesi: ");
+        for (CoffeeOrder order: coffeeList) {
+            order.printCoffeeInfo();
+        }
+        System.out.println("Lütfen içmek istediğiniz kahvenin numarasını giriniz:");
+        coffeeNumber = scan.nextInt();
+        do {
+            System.out.println("Lütfen 1 ile 7 arası geçerli bir numara giriniz: ");
+            coffeeNumber = scan.nextInt();
+        } while (coffeeNumber < 1 || coffeeNumber > 7);
+
+        // 2. Gereksinim
+        System.out.println("Teşekkürler kahveniz hazırlanıyor.");
+
+        // 3. Gereksinim
         coffeeList.get(coffeeNumber - 1).printOrderInfo();
     }
 }
