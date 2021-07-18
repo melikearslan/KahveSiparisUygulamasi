@@ -87,10 +87,10 @@ public class CoffeeShopApplication {
         }
         System.out.println("Lütfen içmek istediğiniz kahvenin numarasını giriniz:");
         coffeeNumber = scan.nextInt();
-        do {
+        while (coffeeNumber < 1 || coffeeNumber > 7) {
             System.out.println("Lütfen 1 ile 7 arası geçerli bir numara giriniz: ");
             coffeeNumber = scan.nextInt();
-        } while (coffeeNumber < 1 || coffeeNumber > 7);
+        }
 
         // 2. Gereksinim
         System.out.println("Teşekkürler kahveniz hazırlanıyor.");
