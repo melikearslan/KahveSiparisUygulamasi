@@ -78,6 +78,10 @@ public class CoffeeShopApplication {
         System.out.println(coffeeList);
         System.out.println("Lütfen içmek istediğiniz kahvenin numarasını giriniz:");
         coffeeNumber = scan.nextInt();
+        do {
+            System.out.println("Lütfen 1 ile 7 arası geçerli bir numara giriniz: ");
+            coffeeNumber = scan.nextInt();
+        } while (coffeeNumber < 0 || coffeeNumber > 8);
 
         // 2. Gereksinim
         System.out.println("Teşekkürler kahveniz hazırlanıyor.");
